@@ -30,6 +30,38 @@ include('includes/header.php');
 
         </div>
         <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query = "SELECT * FROM task";
+                    $result_tasks = mysqli_query($conn, $query);
+                    
+                    while($row = mysqli_fetch_array($result_tasks)) { ?>
+                        <tr>
+                            <td> <?php echo $row['title'] ?> </td>
+                            <td> <?php echo $row['description'] ?> </td>
+                            <td> <?php echo $row['created_at'] ?> </td>
+                            <td>
+                                <a href="edit_task.php?id=<?php echo $row['id']?>" class="btn btn-secondary">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="delete_task.php?id=<?php echo $row['id']?>" class="btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    
+                    <?php } ?>
+                </tbody>
+            </table>
 
         </div>
     </div>
